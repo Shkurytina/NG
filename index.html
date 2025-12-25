@@ -25,233 +25,6 @@
             position: relative;
         }
 
-        /* Летающий Санта */
-        .flying-santa {
-            position: fixed;
-            top: 0;
-            left: -200px;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.9;
-            filter: drop-shadow(0 0 15px rgba(255, 50, 50, 0.7));
-            animation: santaFly 25s linear infinite;
-        }
-
-        .santa-body {
-            position: relative;
-            width: 150px;
-            height: 150px;
-        }
-
-        .santa-hat {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 100px;
-            background: #c00;
-            border-radius: 50% 50% 0 0;
-            z-index: 3;
-        }
-
-        .santa-hat::before {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background: white;
-            border-radius: 50%;
-        }
-
-        .santa-hat::after {
-            content: '';
-            position: absolute;
-            top: -15px;
-            right: -10px;
-            width: 40px;
-            height: 40px;
-            background: white;
-            border-radius: 50%;
-        }
-
-        .santa-face {
-            position: absolute;
-            top: 35px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 70px;
-            background: #ffcc99;
-            border-radius: 50%;
-            z-index: 2;
-        }
-
-        .santa-beard {
-            position: absolute;
-            top: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90px;
-            height: 60px;
-            background: white;
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            z-index: 1;
-        }
-
-        .santa-body-suit {
-            position: absolute;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 80px;
-            background: #c00;
-            border-radius: 50% 50% 0 0;
-        }
-
-        .santa-belt {
-            position: absolute;
-            top: 130px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90px;
-            height: 15px;
-            background: #333;
-            border-radius: 10px;
-            z-index: 2;
-        }
-
-        .santa-buckle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 25px;
-            height: 25px;
-            background: gold;
-            border-radius: 50%;
-        }
-
-        .santa-sleigh {
-            position: absolute;
-            top: 160px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 20px;
-            background: #8B4513;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .reindeer {
-            position: absolute;
-            top: 140px;
-            left: -40px;
-            width: 40px;
-            height: 40px;
-            background: #8B4513;
-            border-radius: 50%;
-            animation: reindeerBob 1s ease-in-out infinite alternate;
-        }
-
-        .reindeer::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            width: 20px;
-            height: 30px;
-            background: #8B4513;
-            border-radius: 50%;
-        }
-
-        .reindeer::after {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 25px;
-            width: 15px;
-            height: 10px;
-            background: #8B4513;
-            border-radius: 50%;
-        }
-
-        .reindeer:nth-child(2) {
-            left: auto;
-            right: -40px;
-            animation-delay: 0.5s;
-        }
-
-        .reindeer-horn {
-            position: absolute;
-            top: -15px;
-            left: 15px;
-            width: 10px;
-            height: 20px;
-            background: #8B4513;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        }
-
-        .snow-trail {
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            opacity: 0.7;
-        }
-
-        .snow-flake {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            filter: blur(1px);
-            animation: snowFall 1.5s linear infinite;
-        }
-
-        @keyframes santaFly {
-            0% {
-                transform: translateX(-200px) translateY(100px) rotate(-5deg);
-            }
-            25% {
-                transform: translateX(25vw) translateY(50px) rotate(5deg);
-            }
-            50% {
-                transform: translateX(50vw) translateY(150px) rotate(-5deg);
-            }
-            75% {
-                transform: translateX(75vw) translateY(80px) rotate(5deg);
-            }
-            100% {
-                transform: translateX(calc(100vw + 200px)) translateY(120px) rotate(-5deg);
-            }
-        }
-
-        @keyframes reindeerBob {
-            0% {
-                transform: translateY(0px);
-            }
-            100% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes snowFall {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(30px) translateX(10px);
-                opacity: 0;
-            }
-        }
-
         /* Оверлей для модального окна */
         .modal-overlay {
             display: none;
@@ -843,10 +616,6 @@
         }
 
         @media (max-width: 768px) {
-            .flying-santa {
-                transform: scale(0.7);
-            }
-            
             .garland-side {
                 display: none;
             }
@@ -885,10 +654,6 @@
         }
 
         @media (max-width: 480px) {
-            .flying-santa {
-                display: none;
-            }
-            
             .garland-top {
                 display: none;
             }
@@ -909,27 +674,6 @@
     </style>
 </head>
 <body>
-    <!-- Летающий Санта -->
-    <div class="flying-santa" id="flyingSanta">
-        <div class="santa-body">
-            <div class="santa-hat"></div>
-            <div class="santa-face"></div>
-            <div class="santa-beard"></div>
-            <div class="santa-body-suit"></div>
-            <div class="santa-belt">
-                <div class="santa-buckle"></div>
-            </div>
-            <div class="santa-sleigh"></div>
-            <div class="reindeer">
-                <div class="reindeer-horn"></div>
-            </div>
-            <div class="reindeer">
-                <div class="reindeer-horn"></div>
-            </div>
-        </div>
-        <div class="snow-trail" id="snowTrail"></div>
-    </div>
-
     <!-- Модальное окно для сообщения -->
     <div class="modal-overlay" id="messageModal">
         <div class="modal-content">
@@ -1049,53 +793,6 @@
             }
         }
 
-        // Создаем снежный след за сантой
-        function createSantaSnow() {
-            const snowTrail = document.getElementById('snowTrail');
-            const snowCount = 20;
-            
-            for (let i = 0; i < snowCount; i++) {
-                const snow = document.createElement('div');
-                snow.className = 'snow-flake';
-                snow.style.left = Math.random() * 100 + '%';
-                snow.style.animationDelay = Math.random() * 1.5 + 's';
-                snowTrail.appendChild(snow);
-            }
-        }
-
-        // Запускаем нескольких сант
-        function createMultipleSantas() {
-            const santaContainer = document.getElementById('flyingSanta');
-            const santaCount = 2; // Еще один Санта
-            
-            for (let i = 1; i < santaCount; i++) {
-                const santaClone = santaContainer.cloneNode(true);
-                santaClone.id = 'flyingSanta' + i;
-                santaClone.style.animationDelay = (i * 12.5) + 's';
-                santaClone.style.animationDuration = '30s';
-                santaClone.style.zIndex = '0';
-                santaClone.style.opacity = '0.6';
-                document.body.appendChild(santaClone);
-                
-                // Снег для клона
-                const snowTrail = santaClone.querySelector('.snow-trail');
-                snowTrail.id = 'snowTrail' + i;
-                createSnowForSanta(snowTrail);
-            }
-        }
-
-        function createSnowForSanta(container) {
-            const snowCount = 15;
-            
-            for (let i = 0; i < snowCount; i++) {
-                const snow = document.createElement('div');
-                snow.className = 'snow-flake';
-                snow.style.left = Math.random() * 100 + '%';
-                snow.style.animationDelay = Math.random() * 1.5 + 's';
-                container.appendChild(snow);
-            }
-        }
-
         // Создаем мерцающие искорки на фото
         function createSparkles() {
             const sparklesContainer = document.getElementById('sparkles');
@@ -1173,15 +870,6 @@
             
             // Мигание гирлянд
             blinkGarlands();
-            
-            // Ускоряем Санту
-            const santas = document.querySelectorAll('[id^="flyingSanta"]');
-            santas.forEach(santa => {
-                santa.style.animationDuration = '5s';
-                setTimeout(() => {
-                    santa.style.animationDuration = '25s';
-                }, 1000);
-            });
         }
 
         // Закрытие модального окна
@@ -1223,33 +911,12 @@
             });
         }
 
-        // Анимация Санты при наведении
-        function setupSantaHover() {
-            const santas = document.querySelectorAll('[id^="flyingSanta"]');
-            santas.forEach(santa => {
-                santa.addEventListener('mouseenter', function() {
-                    this.style.animationPlayState = 'paused';
-                    this.style.transform += ' scale(1.2)';
-                    this.style.filter = 'drop-shadow(0 0 25px rgba(255, 50, 50, 1))';
-                });
-                
-                santa.addEventListener('mouseleave', function() {
-                    this.style.animationPlayState = 'running';
-                    this.style.transform = this.style.transform.replace(' scale(1.2)', '');
-                    this.style.filter = 'drop-shadow(0 0 15px rgba(255, 50, 50, 0.7))';
-                });
-            });
-        }
-
         // Инициализация при загрузке
         window.addEventListener('DOMContentLoaded', () => {
             createHearts();
-            createSantaSnow();
-            createMultipleSantas();
             createSparkles();
             createExtraGarlands();
             animateGarlands();
-            setupSantaHover();
             
             // Добавляем плавное появление элементов при скролле
             const observerOptions = {
@@ -1285,18 +952,6 @@
             setInterval(() => {
                 animateGarlands();
             }, 5000);
-            
-            // Случайное изменение траектории Санты
-            setInterval(() => {
-                const santas = document.querySelectorAll('[id^="flyingSanta"]');
-                santas.forEach(santa => {
-                    if (Math.random() > 0.7) {
-                        const randomY = Math.random() * 100 + 50;
-                        santa.style.animation = `santaFly 25s linear infinite`;
-                        santa.style.animationDelay = '0s';
-                    }
-                });
-            }, 10000);
         });
     </script>
 </body>
