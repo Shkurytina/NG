@@ -14,21 +14,146 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ffd6e7 0%, #ffeff6 50%, #ffffff 100%);
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a2a4a 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
+            color: white;
+            position: relative;
         }
 
+        /* Гирлянды */
+        .garland {
+            position: fixed;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .garland-top {
+            top: 10px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .garland-side {
+            position: fixed;
+            top: 0;
+            height: 100%;
+            width: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .garland-left {
+            left: 10px;
+        }
+
+        .garland-right {
+            right: 10px;
+        }
+
+        .light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: relative;
+            animation: twinkle 1.5s infinite alternate;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .light::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .light:nth-child(odd) {
+            background: #ff6b9d;
+            color: #ff6b9d;
+            animation-delay: 0s;
+        }
+
+        .light:nth-child(even) {
+            background: #ffd166;
+            color: #ffd166;
+            animation-delay: 0.5s;
+        }
+
+        .light:nth-child(3n) {
+            background: #06d6a0;
+            color: #06d6a0;
+            animation-delay: 1s;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.2);
+                box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+            }
+        }
+
+        /* Гирлянда-нить */
+        .wire {
+            position: fixed;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            z-index: 0;
+        }
+
+        .wire::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                #ff6b9d, 
+                #ffd166, 
+                #06d6a0, 
+                #118ab2, 
+                #ff6b9d, 
+                transparent);
+            filter: blur(2px);
+            animation: wireFlow 10s linear infinite;
+        }
+
+        @keyframes wireFlow {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Контейнер с контентом */
         .container {
             max-width: 800px;
             width: 100%;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1.2s ease-out forwards;
+            z-index: 2;
+            position: relative;
         }
 
         @keyframes fadeInUp {
@@ -45,7 +170,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 1;
         }
 
         .heart {
@@ -73,15 +198,15 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(20, 20, 40, 0.85);
+            backdrop-filter: blur(20px);
             border-radius: 25px;
             padding: 40px;
             box-shadow: 
-                0 20px 60px rgba(255, 105, 180, 0.2),
-                0 5px 15px rgba(0, 0, 0, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 50px rgba(255, 105, 180, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
             margin-bottom: 30px;
@@ -94,7 +219,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(90deg, #ff6b9d, #ffd166, #ff6b9d);
+            background: linear-gradient(90deg, #ff6b9d, #ffd166, #06d6a0, #118ab2, #ff6b9d);
             background-size: 200% 100%;
             animation: shimmer 3s infinite linear;
         }
@@ -112,14 +237,14 @@
 
         .title {
             font-size: 3.5rem;
-            background: linear-gradient(45deg, #ff6b9d, #ff8e53, #ff6b9d);
+            background: linear-gradient(45deg, #ff6b9d, #ffd166, #06d6a0, #118ab2);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             display: inline-block;
             margin-bottom: 15px;
             animation: pulse 2s infinite;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
         }
 
         @keyframes pulse {
@@ -129,7 +254,7 @@
 
         .subtitle {
             font-size: 1.3rem;
-            color: #ff6b9d;
+            color: #ffd166;
             font-weight: 300;
             letter-spacing: 2px;
             animation: fadeIn 2s ease-out 0.5s both;
@@ -147,23 +272,28 @@
         .message {
             font-size: 1.4rem;
             line-height: 1.8;
-            color: #555;
             text-align: center;
             margin-bottom: 25px;
             padding: 20px;
-            background: rgba(255, 235, 245, 0.6);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             border-left: 5px solid #ff6b9d;
             transform: translateX(-20px);
             opacity: 0;
             animation: slideIn 0.8s ease-out forwards;
-            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 
+                inset 0 0 20px rgba(255, 255, 255, 0.05),
+                0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .message:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.15);
+            box-shadow: 
+                inset 0 0 30px rgba(255, 255, 255, 0.1),
+                0 10px 25px rgba(0, 0, 0, 0.3);
+            border-left-color: #ffd166;
         }
 
         @keyframes slideIn {
@@ -197,18 +327,37 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.15),
-                0 10px 20px rgba(0, 0, 0, 0.1);
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 30px rgba(0, 0, 0, 0.5);
             position: relative;
-            border: 10px solid white;
+            border: 10px solid transparent;
+            background: linear-gradient(45deg, #ff6b9d, #ffd166, #06d6a0) border-box;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 10px;
+            padding: 1px;
+            background: linear-gradient(45deg, #ff6b9d, #ffd166, #06d6a0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
         }
 
         .photo-frame:hover {
             transform: perspective(1000px) rotateY(5deg) rotateX(2deg);
             box-shadow: 
-                0 35px 70px rgba(0, 0, 0, 0.2),
-                0 15px 30px rgba(0, 0, 0, 0.15);
+                0 35px 70px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                0 0 50px rgba(255, 107, 157, 0.4);
         }
 
         .photo-frame img {
@@ -228,21 +377,21 @@
             right: -15px;
             width: 60px;
             height: 60px;
-            background: #ff6b9d;
+            background: linear-gradient(45deg, #ff6b9d, #ffd166);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 24px;
-            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.6);
             z-index: 2;
             animation: bounce 2s infinite;
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
         }
 
         .sparkles {
@@ -291,7 +440,7 @@
         .secret-button {
             margin-top: 20px;
             padding: 15px 40px;
-            background: linear-gradient(45deg, #ff6b9d, #ff8e53);
+            background: linear-gradient(45deg, #ff6b9d, #ffd166);
             color: white;
             border: none;
             border-radius: 50px;
@@ -299,18 +448,93 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(255, 107, 157, 0.3);
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
             opacity: 0;
             animation: fadeIn 1s ease-out 2.5s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secret-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .secret-button:hover::before {
+            left: 100%;
         }
 
         .secret-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.4);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2);
             letter-spacing: 2px;
         }
 
+        /* Украшения в углах */
+        .corner-decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            opacity: 0.3;
+        }
+
+        .corner-tl {
+            top: -10px;
+            left: -10px;
+            border-top: 3px solid #ff6b9d;
+            border-left: 3px solid #ff6b9d;
+            border-radius: 20px 0 0 0;
+        }
+
+        .corner-tr {
+            top: -10px;
+            right: -10px;
+            border-top: 3px solid #ffd166;
+            border-right: 3px solid #ffd166;
+            border-radius: 0 20px 0 0;
+        }
+
+        .corner-bl {
+            bottom: -10px;
+            left: -10px;
+            border-bottom: 3px solid #06d6a0;
+            border-left: 3px solid #06d6a0;
+            border-radius: 0 0 0 20px;
+        }
+
+        .corner-br {
+            bottom: -10px;
+            right: -10px;
+            border-bottom: 3px solid #118ab2;
+            border-right: 3px solid #118ab2;
+            border-radius: 0 0 20px 0;
+        }
+
         @media (max-width: 768px) {
+            .garland-side {
+                display: none;
+            }
+            
+            .garland-top {
+                gap: 10px;
+                height: 30px;
+            }
+            
+            .light {
+                width: 8px;
+                height: 8px;
+            }
+            
             .title {
                 font-size: 2.5rem;
             }
@@ -330,6 +554,10 @@
         }
 
         @media (max-width: 480px) {
+            .garland-top {
+                display: none;
+            }
+            
             .title {
                 font-size: 2rem;
             }
@@ -346,10 +574,41 @@
     </style>
 </head>
 <body>
+    <!-- Гирлянды -->
+    <div class="wire"></div>
+    
+    <div class="garland garland-top">
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+    </div>
+    
+    <div class="garland garland-side garland-left">
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+    </div>
+    
+    <div class="garland garland-side garland-right">
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+        <div class="light"></div><div class="light"></div><div class="light"></div>
+    </div>
+    
     <div class="heart-background" id="heartBackground"></div>
     
     <div class="container">
         <div class="card">
+            <!-- Украшения в углах -->
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-tr"></div>
+            <div class="corner-decoration corner-bl"></div>
+            <div class="corner-decoration corner-br"></div>
+            
             <div class="header">
                 <h1 class="title">Привет, красотка! 😉</h1>
                 <p class="subtitle">Специально для тебя</p>
@@ -395,6 +654,7 @@
                 heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
                 heart.style.animationDelay = Math.random() * 5 + 's';
                 heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
                 heartBackground.appendChild(heart);
             }
         }
@@ -415,6 +675,40 @@
             }
         }
 
+        // Создаем дополнительные гирлянды
+        function createExtraGarlands() {
+            const garlandTop = document.querySelector('.garland-top');
+            const garlandLeft = document.querySelector('.garland-left');
+            const garlandRight = document.querySelector('.garland-right');
+            
+            // Добавляем больше лампочек
+            for (let i = 0; i < 10; i++) {
+                const light = document.createElement('div');
+                light.className = 'light';
+                light.style.animationDelay = Math.random() * 2 + 's';
+                garlandTop.appendChild(light.cloneNode(true));
+                garlandLeft.appendChild(light.cloneNode(true));
+                garlandRight.appendChild(light.cloneNode(true));
+            }
+        }
+
+        // Анимация гирлянд при загрузке
+        function animateGarlands() {
+            const lights = document.querySelectorAll('.light');
+            lights.forEach((light, index) => {
+                light.style.animationDelay = `${index * 0.1}s`;
+                
+                // Случайное изменение цвета
+                const colors = ['#ff6b9d', '#ffd166', '#06d6a0', '#118ab2', '#9d4edd'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                setTimeout(() => {
+                    light.style.background = randomColor;
+                    light.style.boxShadow = `0 0 15px ${randomColor}, 0 0 25px ${randomColor}`;
+                }, index * 100);
+            });
+        }
+
         // Секретное сообщение
         function showSecretMessage() {
             const messages = [
@@ -422,42 +716,65 @@
                 "В твоих глазах целая вселенная возможностей ✨",
                 "Ты вдохновляешь меня становиться лучше каждый день 💫",
                 "С тобой даже обычные моменты становятся волшебными 🎀",
-                "Ты — мое самое большое везение в жизни 🍀"
+                "Ты — мое самое большое везение в жизни 🍀",
+                "Твоя улыбка — самый красивый рассвет 🌅",
+                "С тобой я счастлив без причины и навсегда 💖"
             ];
             
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
             
-            // Создаем красивый alert
+            // Создаем красивый alert с анимацией гирлянд
             const alertBox = document.createElement('div');
             alertBox.style.cssText = `
                 position: fixed;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                background: linear-gradient(45deg, #ff6b9d, #ff8e53);
+                background: linear-gradient(45deg, #1a1a3a, #2a2a4a);
                 color: white;
-                padding: 30px;
+                padding: 40px;
                 border-radius: 20px;
-                box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+                box-shadow: 
+                    0 0 50px rgba(255, 107, 157, 0.5),
+                    0 20px 60px rgba(0, 0, 0, 0.6),
+                    inset 0 0 20px rgba(255, 255, 255, 0.1);
                 z-index: 1000;
                 text-align: center;
                 max-width: 80%;
                 animation: popIn 0.5s ease-out;
-                border: 3px solid white;
+                border: 2px solid transparent;
+                background-clip: padding-box;
+                position: relative;
+                backdrop-filter: blur(10px);
+            `;
+            
+            // Добавляем мини-гирлянду вокруг сообщения
+            const garlandHTML = `
+                <div style="position: absolute; top: -10px; left: 20px; right: 20px; display: flex; justify-content: space-between;">
+                    ${Array(8).fill().map(() => 
+                        `<div style="width: 8px; height: 8px; border-radius: 50%; 
+                          background: #ff6b9d; animation: twinkle 1s infinite alternate;"></div>`
+                    ).join('')}
+                </div>
             `;
             
             alertBox.innerHTML = `
-                <h3 style="margin-bottom: 15px; font-size: 1.5rem;">✨ Секретное послание ✨</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 20px;">${randomMessage}</p>
+                ${garlandHTML}
+                <h3 style="margin-bottom: 20px; font-size: 1.8rem; background: linear-gradient(45deg, #ff6b9d, #ffd166);
+                    -webkit-background-clip: text; background-clip: text; color: transparent;">
+                    ✨ Секретное послание ✨
+                </h3>
+                <p style="font-size: 1.3rem; margin-bottom: 30px; line-height: 1.6;">${randomMessage}</p>
                 <button onclick="this.parentElement.remove()" style="
-                    background: white;
-                    color: #ff6b9d;
+                    background: linear-gradient(45deg, #ff6b9d, #ffd166);
+                    color: white;
                     border: none;
-                    padding: 10px 25px;
+                    padding: 12px 30px;
                     border-radius: 25px;
                     font-weight: bold;
                     cursor: pointer;
                     transition: all 0.3s;
+                    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
                 " onmouseover="this.style.transform='scale(1.1)'" 
                   onmouseout="this.style.transform='scale(1)'">
                     Закрыть
@@ -476,12 +793,33 @@
                 }
             `;
             document.head.appendChild(style);
+            
+            // Мигание гирлянд при показе сообщения
+            blinkGarlands();
+        }
+
+        // Функция для мигания гирлянд
+        function blinkGarlands() {
+            const lights = document.querySelectorAll('.light');
+            lights.forEach(light => {
+                const originalDelay = light.style.animationDelay;
+                light.style.animationDuration = '0.3s';
+                light.style.animationIterationCount = '3';
+                
+                setTimeout(() => {
+                    light.style.animationDuration = '1.5s';
+                    light.style.animationIterationCount = 'infinite';
+                    light.style.animationDelay = originalDelay;
+                }, 1000);
+            });
         }
 
         // Инициализация при загрузке
         window.addEventListener('DOMContentLoaded', () => {
             createHearts();
             createSparkles();
+            createExtraGarlands();
+            animateGarlands();
             
             // Добавляем плавное появление элементов при скролле
             const observerOptions = {
@@ -501,14 +839,22 @@
             document.querySelectorAll('.message, .image-container, .footer').forEach(el => {
                 observer.observe(el);
             });
-        });
-
-        // Эффект при наведении на заголовок
-        document.querySelector('.title').addEventListener('mouseover', function() {
-            this.style.animation = 'pulse 0.5s ease';
-            setTimeout(() => {
-                this.style.animation = 'pulse 2s infinite';
-            }, 500);
+            
+            // Анимация гирлянд при наведении на заголовок
+            document.querySelector('.title').addEventListener('mouseover', function() {
+                this.style.animation = 'pulse 0.5s ease';
+                setTimeout(() => {
+                    this.style.animation = 'pulse 2s infinite';
+                }, 500);
+                
+                // Быстрое мигание гирлянд
+                blinkGarlands();
+            });
+            
+            // Периодическое изменение гирлянд
+            setInterval(() => {
+                animateGarlands();
+            }, 5000);
         });
     </script>
 </body>
